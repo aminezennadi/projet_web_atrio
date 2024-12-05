@@ -1,0 +1,9 @@
+models\Emplois.class
+controllers\PersonneController.class
+services\EmploisService.class
+services\PersonneService.class
+repositories\PersonneRepository.class
+controllers\EmploisController.class
+WebAtrioApplication.class
+models\Personne.class
+repositories\EmploisRepository.class
