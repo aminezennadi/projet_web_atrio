@@ -1,8 +1,10 @@
 package app.controllers;
 
 import app.models.Emplois;
+import app.models.Personne;
 import app.services.EmploisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -15,19 +17,16 @@ public class EmploisController {
     @Autowired
     private EmploisService emploisService;
 
-    @GetMapping
-    public List<Emplois> getAllEmplois() {
-        return emploisService.getAllEmplois();
-    }
-
-    @PostMapping
-    public Emplois addEmplois(@RequestBody Emplois emplois) {
-        return emploisService.saveEmplois(emplois);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteEmplois(@PathVariable int id) {
-        emploisService.deleteEmplois(id);
+    @PostMapping("/assign")
+    public ResponseEntity<Emplois> createAndAssignEmploi(
+            @RequestParam int personneId,
+            @RequestBody Emplois emploi) {
+        try {
+            Emplois savedEmploi = emploisService.createAndAssignEmploi(personneId, emploi);
+            return ResponseEntity.ok(savedEmploi);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     @GetMapping("/between-dates")

@@ -1,5 +1,6 @@
 package app.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
@@ -23,8 +24,12 @@ public class Personne {
     @Column(name = "date_naissance", nullable = false)
     private LocalDate dateNaissance;
 
-    @ManyToMany(mappedBy = "personnes", cascade = CascadeType.ALL)
-    private Set<Emplois> emplois = new HashSet<>();
+    /*
+     *  Utiliser JsonIgnore pour éviter les problèmes de sérialisation
+     */
+    @ManyToMany(mappedBy = "personnes")
+    @JsonIgnore
+    private Set<Emplois> emplois;
 
     public Personne() {}
 

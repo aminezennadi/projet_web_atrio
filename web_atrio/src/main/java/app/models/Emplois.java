@@ -25,7 +25,7 @@ public class Emplois {
     @Column(name = "date_fin")
     private LocalDate dateFin;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "personne_emplois",
             joinColumns = @JoinColumn(name = "emploi_id"),

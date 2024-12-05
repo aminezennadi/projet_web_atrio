@@ -14,19 +14,9 @@ public class PersonneController {
     @Autowired
     private PersonneService personneService;
 
-    @GetMapping
-    public List<Personne> getAllPersonnes() {
-        return personneService.getAllPersonnes();
-    }
-
     @PostMapping
     public Personne addPersonne(@RequestBody Personne personne) {
         return personneService.savePersonne(personne);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deletePersonne(@PathVariable int id) {
-        personneService.deletePersonne(id);
     }
 
     @GetMapping("/with-jobs")

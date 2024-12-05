@@ -16,19 +16,11 @@ public class PersonneService {
     @Autowired
     private PersonneRepository personneRepository;
 
-    public List<Personne> getAllPersonnes() {
-        return personneRepository.findAll();
-    }
-
     public Personne savePersonne(Personne personne) {
         if (!personne.isAgeValid()) {
             throw new IllegalArgumentException("La personne doit avoir moins de 150 ans.");
         }
         return personneRepository.save(personne);
-    }
-
-    public void deletePersonne(int id) {
-        personneRepository.deleteById(id);
     }
 
     public int calculateAge(LocalDate dateNaissance) {
